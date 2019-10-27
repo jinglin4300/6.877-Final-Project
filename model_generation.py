@@ -73,4 +73,19 @@ class model_generation():
     def find_nonassigned_variables(self):
         # find decision variables not yet assigned
         pass
-        
+    
+    
+class Valve():
+    class Variable(Expression):
+    def __init__(self, name, domain=['True', 'False', 'False'], decision_variable=False):
+        self.name = str(name)
+        self.domain = frozenset(domain)
+        self.assignments = {}
+        # Initialize assignments
+        for di in self.domain:
+            self.assignments[di] = Assignment((self, di))
+
+            return self.assignments[di]
+
+    def set_probabilities(self, prob_desc):
+        # Do some sanity checking
