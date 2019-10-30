@@ -100,13 +100,11 @@ class Valve():
             self.value = {0:0,1:0}
         if self.mode == 'So':
             self.value = {0:0,1:1}
+        self.output = self.value[self.input]
 
     def set_mode(val):
         self.mode = val
-        
-    def get_output():
-        return self.value[self.input]
-    
+
     def set_input(val):
         self.input=val
     
