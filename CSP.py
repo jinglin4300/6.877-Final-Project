@@ -118,3 +118,5 @@ class Valve():
 
     def get_domain:
         return {self.name: self.domain}
+    def pyro():
+        return self.is_pyro ### checks if it is a pyro or not
