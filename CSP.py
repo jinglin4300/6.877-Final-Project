@@ -75,10 +75,10 @@ class CSP():
 #    def find_nonassigned_variables(self):
 #        # find decision variables not yet assigned
 #        pass
-    def add_valve(self, name, domain=None):
-        var = Valve(name, domain=domain)
+    def add_valve(self, Valve):
+        var = Valve
         self.variables.append(var)
-        self.variable_names[name] = var
+        self.variable_names[var.name] = var
         return var
     
     
@@ -103,20 +103,10 @@ class Valve():
 
     def set_mode(val):
         self.mode = val
-    
+        
     def get_output():
         return self.value[self.input]
     
     def set_input(val):
         self.input=val
     
-    def get_input():
-        return self.input 
-    
-    def get_parent(self):
-        return self.parent
-
-    def get_domain():
-        return {self.name: self.domain}
-    def pyro():
-        return self.is_pyro ### checks if it is a pyro or not
