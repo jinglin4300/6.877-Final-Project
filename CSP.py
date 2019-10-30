@@ -83,13 +83,14 @@ class CSP():
     
     
 class Valve():
-    def __init__(self, name, status, domain=['Nominal', 'Sc', 'So'], is_pyro=False, parent=None, valve_in=1):
+    def __init__(self, name, status, domain=['Nominal', 'Sc', 'So'], is_pyro=False, parent=None, child=0, valve_in=1):
         self.name = str(name)
         self.domain = domain # made it not frozen so we can prune later
         self.assignments = {}
         self.mode = 'Nominal'
         self.is_pyro = is_pyro
         self.parent = parent #let's not do parent for now
+        self.child=child
         self.status = status
         self.input = valve_in
         if self.mode == 'Nominal' and status == 'open' :
@@ -101,6 +102,7 @@ class Valve():
         if self.mode == 'So':
             self.value = {0:0,1:1}
         self.output = self.value[self.input]
+
 
     def set_mode(val):
         self.mode = val
