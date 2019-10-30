@@ -25,10 +25,10 @@ class CSP():
     """
     
     def __init__(self, variables, domains, neighbors, constraints):
-        self.variables = variables
-        self.domains = domains
+        self.variables = []
+        self.domains = []
 #        self.parents = parents # used to track parents for mode propagation
-        self.constraints = constraints
+        self.constraints = []
         self.nassigns = 0 #number of decision variables assigned
         self.curr_domains = None #domain of variables if pruned
 #        self.variable_names = 
@@ -38,12 +38,12 @@ class CSP():
 #            else:
 #                self.constraints[var] = []
     
-    """ This function keeps track of the number of decision variables assigned"""
+    """ This function keeps track of the number of decision variables assigned
     def assign(self, var,val):
 #        add {var:val} to assignmnet, override the old value if there was one
         assingment{var}=val
         self.nassigns +=1
-        
+    """    
 #    def add_constraint(self, constraint):
 #        # add a constraint
 #        pass
@@ -83,7 +83,7 @@ class CSP():
     
     
 class Valve():
-    def __init__(self, name, domain=['Nominal', 'Sc', 'So'], status, is_pyro=False, parent=None, valve_in=1):
+    def __init__(self, name, status, domain=['Nominal', 'Sc', 'So'], is_pyro=False, parent=None, valve_in=1):
         self.name = str(name)
         self.domain = domain # made it not frozen so we can prune later
         self.assignments = {}
@@ -92,13 +92,13 @@ class Valve():
         self.parent = parent #let's not do parent for now
         self.status = status
         self.input = valve_in
-        if mode == 'Nominal' and status == 'open' :
+        if self.mode == 'Nominal' and status == 'open' :
             self.value = {0:0,1:1}
-        if mode == 'Nominal' and status == 'close':
-            self.value = {0:0,1:0)}
-        if mode == 'Sc':
+        if self.mode == 'Nominal' and status == 'close':
             self.value = {0:0,1:0}
-        if mode == 'So'
+        if self.mode == 'Sc':
+            self.value = {0:0,1:0}
+        if self.mode == 'So':
             self.value = {0:0,1:1}
 
     def set_mode(val):
@@ -110,13 +110,13 @@ class Valve():
     def set_input(val):
         self.input=val
     
-    def get_input()
+    def get_input():
         return self.input 
     
     def get_parent(self):
         return self.parent
 
-    def get_domain:
+    def get_domain():
         return {self.name: self.domain}
     def pyro():
         return self.is_pyro ### checks if it is a pyro or not
