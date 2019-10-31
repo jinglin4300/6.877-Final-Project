@@ -83,13 +83,12 @@ class CSP():
     
     
 class Valve():
-    def __init__(self, name, status, domain=['Nominal', 'Sc', 'So'], is_pyro=False, parent=None, valve_in=1):
+    def __init__(self, name, status, domain=['Nominal', 'Sc', 'So'], is_pyro=False, valve_in=1):
         self.name = str(name)
         self.domain = domain # made it not frozen so we can prune later
         self.assignments = {}
         self.mode = 'Nominal'
         self.is_pyro = is_pyro
-        self.parent = parent #let's not do parent for now
         self.status = status
         self.input = valve_in
         if self.mode == 'Nominal' and status == 'open' :
@@ -102,9 +101,28 @@ class Valve():
             self.value = {0:0,1:1}
         self.output = self.value[self.input]
 
+
     def set_mode(val):
         self.mode = val
 
     def set_input(val):
         self.input=val
-    
+        
+        
+class Link():
+    def __init__(self,name,vn,pl, ins1, outs1):
+        self.name=name
+        self.in_valve_name=vn
+        self.prior_link=pl
+        self.ins=ins1
+        self.outs=outs1
+        self.value=None
+        
+    def assign_value(self,node,prior_link_value):
+        if node.status == 'open' and prior_link_value:
+            self.value=prior_link_value
+        elif node.status== 'close':
+            self.value=0
+        elif node.status == 'open':
+            self.value=node.input
+        
