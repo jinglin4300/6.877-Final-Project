@@ -110,14 +110,19 @@ class Valve():
         
         
 class Link():
-    def __init__(self,name,ins1):
+    def __init__(self,name,vn,pl, ins1, outs1):
         self.name=name
+        self.in_valve_name=vn
+        self.prior_link=pl
         self.ins=ins1
+        self.outs=outs1
         self.value=None
         
-    def assign_value(self,node):
-        if node.status == 'open':
-            self.value=node.input
-        elif node.mode== 'close':
+    def assign_value(self,node,prior_link_value):
+        if node.status == 'open' and prior_link_value:
+            self.value=prior_link_value
+        elif node.status== 'close':
             self.value=0
+        elif node.status == 'open':
+            self.value=node.input
         
