@@ -107,6 +107,12 @@ class Valve():
 
     def set_input(val):
         self.input=val
+    def get_corresponding_link(self,links):
+        for each in links:
+            if each.in_valve_name==self.name:
+                return each
+        return None
+        
         
         
 class Link():
@@ -119,10 +125,11 @@ class Link():
         self.value=None
         
     def assign_value(self,node,prior_link_value):
-        if node.status == 'open' and prior_link_value:
+        if node.status == 'open' and prior_link_value!=None:
             self.value=prior_link_value
         elif node.status== 'close':
             self.value=0
         elif node.status == 'open':
             self.value=node.input
+    
         
