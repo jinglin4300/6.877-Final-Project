@@ -70,6 +70,20 @@ class OptimalCSP(CSP):
 
 
 
+    # def conflict_directed_backjumping(self, assignment, conflicts):
+    #     if len(assignment) == len(self.vars):
+    #         return assignment, conflicts
+    #     unassigned_var = None
+    #     for var in self.vars:
+    #         if var not in assignment:
+    #             unassigned_var = var
+    #             break
+        
+    #     for value in self.domains[unassigned_var]:
+    #         local_assignment = assignment.copy()
+    #         local_assignment[unassigned_var] = value
+
+
     def backtrack_search_conflict(self, assignment, conflicts):
         if len(assignment) == len(self.vars):
             return assignment, None
