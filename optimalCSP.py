@@ -111,6 +111,7 @@ class OptimalCSP(CSP):
         return None, conflicts
 
     def consistency_conflict_check(self, assignment):
+#        print('----------------------------------------------')
         for var in self.constraints.keys():
             constraints_on_var = self.constraints[var]
             constraints_var_satisfied = False
@@ -122,6 +123,7 @@ class OptimalCSP(CSP):
                 # looping through to each constraint value for var nbrs and var itself
                 # need all condition to be true for this particular constraint
                 for var_key in c_dict.keys():
+#                    print('The key within the c_dict keys is {}, with dictonary {}'.format(var_key,c_dict))
                     constrainted_value = c_dict[var_key]
                     if var_key in assignment:
                         if assignment[var_key] != constrainted_value:
