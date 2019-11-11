@@ -90,7 +90,6 @@ def cda(optimal_csp,output):
 
 
 
-
 def remove_conflict(conflict, queue,output,conflict_list):
     ## output needs to be true or False 
     # remove any states in Q that manifest conflict
@@ -101,11 +100,14 @@ def remove_conflict(conflict, queue,output,conflict_list):
 #    print('\n----------------------------------------------------------')
 #    print('remind me again what is in conflict {}'.format(conflict))
 #    print('remind me again of what the prior conflcits were {}'.format(conflict_list))
+    
+    
     while len(issue)==0:
-        for var in conflict:
+        for var in range(4,0,-1):
             temp_issue=[]
-            if conflict[var] !=output:
-                num_var=int(var)
+            str_var=str(var)
+            num_var=var
+            if conflict[str_var] !=output:
                 while num_var>0:
                     temp_issue.append(num_var)
                     num_var=num_var-2
