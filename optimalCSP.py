@@ -12,9 +12,9 @@ class CSP():
             for c in constraints[var]:
                 self.constraints[var].append(c)
 
-    def backtrack_search(self, assignment):
+    def backtrack_search(self, assignment, num_check):
         if len(assignment) == len(self.vars):
-            return assignment
+            return assignment, num_check
         unassigned_var = None
         for var in self.vars:
             if var not in assignment:
@@ -24,11 +24,12 @@ class CSP():
         for value in self.domains[unassigned_var]:
             local_assignment = assignment.copy()
             local_assignment[var] = value
+            num_check += 1
             if self.consistency_check(local_assignment):
-                result = self.backtrack_search(local_assignment)
+                result, num_check = self.backtrack_search(local_assignment, num_check)
                 if result is not None:
-                    return result
-        return None
+                    return result, num_check
+        return None, num_check
                
 
     def consistency_check(self, assignment):
