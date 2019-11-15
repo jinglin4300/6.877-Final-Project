@@ -13,19 +13,24 @@ class CSP():
                 self.constraints[var].append(c)
 
     def backtrack_search(self, assignment, num_check):
+        # find a complete, consistent assignment
         if len(assignment) == len(self.vars):
             return assignment, num_check
+        
+        # find one variable haven't assigned yet
         unassigned_var = None
         for var in self.vars:
             if var not in assignment:
                 unassigned_var = var
                 break
 
+        # try all domain values for the unassigned var
         for value in self.domains[unassigned_var]:
             local_assignment = assignment.copy()
             local_assignment[var] = value
             num_check += 1
             if self.consistency_check(local_assignment):
+                # expand using pontential local assignment that includes the unassigned var just assigned
                 result, num_check = self.backtrack_search(local_assignment, num_check)
                 if result is not None:
                     return result, num_check
